@@ -1,0 +1,4 @@
+var Strings = {
+    titleSuffix: ' | Bookr'
+
+};
