@@ -1,1 +1,8 @@
 <h2>BookSearch</h2>
+<ul>
+    {{#each}}
+        <li>{{#link-to 'bookDetail' _id}}
+            {{title}}
+        {{/link-to}}</li>
+    {{/each}}
+</ul>

@@ -44,7 +44,7 @@ module.exports = function (grunt) {
                 tasks: watchTasks
             },
             hbs:{
-                files: [ '<%= bookr.src %>/js/templates/*.handlebars'],
+                files: [ '<%= bookr.src %>/hbs/**/*.handlebars'],
                 tasks: watchTasks
             },
             css:{

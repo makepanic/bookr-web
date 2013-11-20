@@ -8,6 +8,7 @@ require('./vendor/ember/ember.js');
 // utils
 require('./util/strings');
 require('./util/app');
+require('./util/temporaryStore');
 
 require('./templates.js');
 
@@ -18,4 +19,6 @@ require('./routes/router');
 require('./model/book.js');
 
 // controller
-//require('./controller/');
+require('./controller/ApplicationController.js');
+require('./controller/bookSearch.controller');
+require('./controller/bookDetail.controller');
