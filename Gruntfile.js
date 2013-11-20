@@ -28,34 +28,35 @@ module.exports = function (grunt) {
         return newArray;
     };
 
+    var watchTasks = [
+        'copy:tmp',
+        'build',
+        'copy:assets'
+    ];
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         yeoman: yeomanConfig,
         bookr: bookrConfig,
-//        watch: {
-//            emberTemplates: {
-//                files: '<%= bookr.src %>/hbs/**/*.handlebars',
-//                tasks: ['emberTemplates']
-//            },
-//            neuter: {
-//                files: ['<%= bookr.src %>/js/{,*/}*.js'],
-//                tasks: ['neuter']
-//            }
-//        },
-//        clean: {
-//            dist: {
-//                files: [{
-//                    dot: true,
-//                    src: [
-//                        '.tmp',
-//                        '<%= yeoman.dist %>/*',
-//                        '!<%= yeoman.dist %>/.git*'
-//                    ]
-//                }]
-//            },
-//            server: '.tmp'
-//        },
+        watch: {
+            js_files:{
+                files: [ '<%= bookr.src %>/js/**/*.js' ],
+                tasks: watchTasks
+            },
+            hbs:{
+                files: [ '<%= bookr.src %>/js/templates/*.handlebars'],
+                tasks: watchTasks
+            },
+            css:{
+                files: [ '<%= bookr.src %>/css/*.css' ],
+                tasks: watchTasks
+            }
+        },
+        clean: {
+            standalone: [ '<%= bookr.dist %>' ],
+            tmp: [ '<%= bookr.tmp %>' ],
+            build: [ '<%= bookr.dist %>', '<%= bookr.tmp %>', '<%= bookr.release %>' ]
+        },
 //         eslint: {
 //            target:  prefixEach(theApplicationFiles, srcPath),
 //            options: {
@@ -92,13 +93,13 @@ module.exports = function (grunt) {
             options: {
                 templateName: function (sourceFile) {
                     //public/js/templates
-                    var regex = new RegExp(bookrConfig.tmp + "/hbs/");
+                    var regex = new RegExp(bookrConfig.src + "/hbs/");
                     return sourceFile.replace(regex, '');
                 }
             },
             dist: {
                 files: {
-                    '<%= bookr.tmp %>': '<%= bookr.src %>/hbs/{,*/}*.hbs'
+                    '<%= bookr.tmp %>/js/templates.js': '<%= bookr.src %>/hbs/**/*.handlebars'
                 }
             }
         },
@@ -108,7 +109,7 @@ module.exports = function (grunt) {
                 options: {
                     template: '{%= src %}'
                 },
-                src: 'src/js/bootstrap.js',
+                src: '<%= bookr.tmp %>/js/bootstrap.js',
                 dest: '<%= bookr.dist %>/<%= pkg.name %>-<%= pkg.version %>.js'
             }
         },
@@ -193,8 +194,8 @@ module.exports = function (grunt) {
 //    ]);
 
     grunt.registerTask('build', [
-        'neuter',
         'emberTemplates',
+        'neuter',
         'cssmin',
         'preprocess'
     ]);
@@ -202,8 +203,10 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
 //        'jshint',
 //        'test',
+        'clean:tmp',
         'copy:tmp',
         'build',
-        'copy:assets'
+        'copy:assets',
+        'watch'
     ]);
 };

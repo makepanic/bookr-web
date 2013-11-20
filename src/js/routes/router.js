@@ -11,7 +11,7 @@ BOOKR.Router.reopen({
 });
 BOOKR.IndexRoute = Ember.Route.extend({
     activate: function(){
-        GLOBE.set('title', '');
+        BOOKR.set('title', '');
     }
 });
 
