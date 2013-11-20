@@ -43,11 +43,33 @@ BOOKR.Book = Ember.Object.extend({
 BOOKR.Book.reopenClass({
     find: function (id) {
         var promise = new Ember.RSVP.Promise(function (resolve, reject) {
-            var foundBook;
+            var foundBook,
+                requestUrl;
 
             if (id.length) {
                 foundBook = BOOKR.TemporaryStore.find('books', id);
-                resolve(foundBook);
+                if (!foundBook) {
+                    requestUrl = BOOKR.get('apiUrl');
+                    requestUrl += 'book/' + id;
+
+                    $.getJSON(requestUrl).then(function (books) {
+                        return books.map(function (book) {
+                            // check if book already in store
+                            var storedBook = BOOKR.TemporaryStore.find('books', book._id),
+                                bookrBook;
+
+                            if (storedBook) {
+                                bookrBook = storedBook;
+                            } else {
+                                bookrBook = BOOKR.Book.create(book);
+                                BOOKR.TemporaryStore.store('books', book._id, bookrBook);
+                            }
+                            resolve(bookrBook);
+                        });
+                    });
+                } else {
+                    resolve(foundBook);
+                }
             } else {
                 reject(this);
             }
