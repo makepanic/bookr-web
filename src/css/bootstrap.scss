@@ -1,3 +1,80 @@
-h2{
-  color: red;
+@import "vendor/purecss/pure-min";
+@import "mixins";
+@import "colors";
+
+body,
+.pure-g [class *= "pure-u"],
+.pure-g-r [class *= "pure-u"] {
+  /* Add your font in here, whether it's a custom font or a normal font */
+  font-family: "Open Sans","lucida grande","Segoe UI",arial,verdana, "lucida sans unicode",tahoma,sans-serif;
 }
+
+
+.wrapper{
+  width: 1000px;
+  margin: 0 auto;
+}
+.second-wrapper{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a{
+  color: $blue;
+  text-decoration: none;
+
+  &:hover{
+    color: $blue-darker;
+  }
+}
+
+.logo{
+  margin: 0;
+  font-weight: lighter;
+  text-align: center;
+  a{
+    display: block;
+  }
+}
+
+.head-bar{
+  margin-top: 50px;
+
+  @include transition(margin-top, .3s, ease);
+}
+.search-bar{
+
+  ::-webkit-input-placeholder { /* WebKit browsers */
+    color:    $grey-darker;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    $grey-darker;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    $grey-darker;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    $grey-darker;
+  }
+
+  input{
+    color: $blue;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid $blue;
+    padding: 10px;
+
+
+
+    &:focus{
+      color: $blue-darker;
+      border-bottom-color: $blue-darker;
+    }
+  }
+}
+
+@import "parts/search-results";
+@import "parts/book-detail";

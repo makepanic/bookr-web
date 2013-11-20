@@ -1,8 +1,16 @@
-<h2>BookSearch</h2>
-<ul>
-    {{#each}}
-        <li>{{#link-to 'bookDetail' _id}}
-            {{title}}
-        {{/link-to}}</li>
-    {{/each}}
-</ul>
+<div class="search-results">
+    <div class="pure-g-r">
+        <div class="pure-u-1-5">
+            <p class="search-meta">{{model.length}} Ergebnisse</p>
+        </div>
+        <div class="pure-u-4-5">
+            <ul>
+                {{#each}}
+                    <li>{{#link-to 'bookDetail' _id}}
+                        {{title}}
+                    {{/link-to}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>

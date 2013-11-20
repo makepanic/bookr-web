@@ -1,1 +1,32 @@
-<h1>{{title}}</h1>
+<div class="book-detail">
+    <div class="pure-g-r">
+
+        <div class="pure-u-1-5">
+            <img {{bindAttr src="largestThumbnail" alt="title"}}/>
+        </div>
+        <div class="pure-u-4-5">
+            <h2>{{title}}</h2>
+
+            <ul>
+                <li>{{subtitle}}</li>
+                <li>{{year}}</li>
+                <li>{{publisher}}</li>
+                <li>
+                    <ul>
+                        {{#each isbn.isbn10}}
+                            <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        {{#each isbn.isbn13}}
+                            <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </li>
+                <li>{{textSnippet}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

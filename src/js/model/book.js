@@ -21,7 +21,23 @@ BOOKR.Book = Ember.Object.extend({
         small: '',
         normal: ''
     },
-    textSnippet: ''
+    textSnippet: '',
+
+    largestThumbnail: function () {
+        var thumb = this.get('thumbnail'),
+            thumbUrl = '';
+
+        if (thumb.normal.length) {
+            thumbUrl = thumb.normal;
+        } else if(thumb.small.length) {
+            thumbUrl = thumb.small;
+        } else {
+            thumbUrl = 'http://placekitten.com/g/200/300';
+        }
+
+        return thumbUrl;
+
+    }.property('thumbnail.small', 'thumbnail.normal')
 });
 
 BOOKR.Book.reopenClass({
@@ -64,7 +80,7 @@ BOOKR.Book.reopenClass({
                     bookrBook = storedBook;
                 } else {
                     bookrBook = BOOKR.Book.create(book);
-                    BOOKR.TemporaryStore.store('books', book._id, book);
+                    BOOKR.TemporaryStore.store('books', book._id, bookrBook);
                 }
                 return bookrBook;
             });

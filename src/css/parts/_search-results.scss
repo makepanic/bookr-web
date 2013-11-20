@@ -1,0 +1,23 @@
+@import "../colors";
+
+.search-meta{
+  margin-top: 10px;
+}
+.search-results{
+  margin-top: 40px;
+
+  ul{
+    margin-top: 0;
+    list-style: none;
+  }
+  li{
+    border-bottom: 1px solid $grey-lighter;
+    &:nth-child(even){
+      background: $white-darker;
+    }
+    a{
+      display: block;
+      padding: 10px;
+    }
+  }
+}

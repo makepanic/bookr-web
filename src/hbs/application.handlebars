@@ -1,11 +1,18 @@
-<div class="pure-g">
-    <div class="pure-u-1">
-        <h1>Bookr</h1>
+<div class="pure-g-r wrapper head-bar">
+    <div class="pure-u-1-5">
+        <h1 class="logo">
+            {{#link-to 'index'}}
+                Bookr
+            {{/link-to}}
+        </h1>
     </div>
-    <div class="pure-u-1">
+    <div class="pure-u-4-5">
         {{ partial "searchBar"}}
     </div>
-    <div class="pure-u-1">
+</div>
+<div class="pure-g wrapper">
+    <div class="pure-u-1-5"></div>
+    <div class="pure-u-4-5">
         {{ outlet }}
     </div>
 </div>
