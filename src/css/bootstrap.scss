@@ -28,6 +28,13 @@ a{
     color: $blue-darker;
   }
 }
+h2,h3,h4,h5,h6{
+  &.sub-header{
+    margin-top: 0;
+    color: $grey-darker;
+    font-weight: lighter;
+  }
+}
 
 .logo{
   margin: 0;

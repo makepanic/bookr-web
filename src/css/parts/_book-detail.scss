@@ -3,11 +3,25 @@
 .book-detail{
   margin-top: 40px;
 
+  ul{
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
   img{
     max-width: 100%;
   }
 
   h2{
     margin-top: 0;
+    margin-bottom: 10px;
   }
+  h5{
+    margin-bottom: 0;
+    & + p{
+      margin-top: 5px;
+    }
+  }
+
 }

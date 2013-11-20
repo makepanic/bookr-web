@@ -32,7 +32,7 @@ BOOKR.Book = Ember.Object.extend({
         } else if(thumb.small.length) {
             thumbUrl = thumb.small;
         } else {
-            thumbUrl = 'http://placekitten.com/g/200/300';
+            thumbUrl = 'http://placehold.it/128x200';
         }
 
         return thumbUrl;
