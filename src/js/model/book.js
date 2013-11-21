@@ -77,10 +77,16 @@ BOOKR.Book.reopenClass({
 
         return promise;
     },
+    /**
+     * Uses the api to search for books via query
+     * @param {{ query: String, more: Boolean }} options
+     * @returns {Promise}
+     */
     search: function (options) {
         var defaults = {
                 query: '',
-                more: false
+                more: false,
+                _calledMore: false
             },
             cfg = $.extend({}, defaults, options),
             requestUrl;
@@ -92,20 +98,47 @@ BOOKR.Book.reopenClass({
             requestUrl += 'more';
         }
 
-        return $.getJSON(requestUrl).then(function (books) {
-            return books.map(function (book) {
-                // check if book already in store
-                var storedBook = BOOKR.TemporaryStore.find('books', book._id),
-                    bookrBook;
+        return new Ember.RSVP.Promise(function (resolve, reject) {
+            resolve($.getJSON(requestUrl));
+        }).then(function (books) {
+            return Ember.RSVP.Promise(function (resolve, reject) {
+                resolve(books.map(function (book) {
+                    // check if book already in store
+                    var storedBook = BOOKR.TemporaryStore.find('books', book._id),
+                        bookrBook;
 
-                if (storedBook) {
-                    bookrBook = storedBook;
-                } else {
-                    bookrBook = BOOKR.Book.create(book);
-                    BOOKR.TemporaryStore.store('books', book._id, bookrBook);
-                }
-                return bookrBook;
+                    if (storedBook) {
+                        bookrBook = storedBook;
+                    } else {
+                        bookrBook = BOOKR.Book.create(book);
+                        BOOKR.TemporaryStore.store('books', book._id, bookrBook);
+                    }
+                    return bookrBook;
+                }));
             });
+        }).then(function (books) {
+            var booksPromise;
+
+            booksPromise = new Ember.RSVP.Promise(function (resolve, reject) {
+                if (books.length || cfg._calledMore) {
+                    console.log('found results, resolving');
+                    resolve(books);
+                } else {
+                    console.log('found no results, calling search with more');
+                    BOOKR.Book.search({
+                        more: true,
+                        query: cfg.query,
+                        _calledMore: true
+                    }).then(function (books) {
+                        resolve(books);
+                    });
+                }
+            });
+
+            return booksPromise;
+
+        }).then(function (books) {
+            return books;
         });
     }
 });

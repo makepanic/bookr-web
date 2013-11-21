@@ -14,6 +14,7 @@ BOOKR.BookSearchRoute = Ember.Route.extend({
             query: query,
             more: false
         }).then(function (data) {
+                console.log('bookr search data', data);
             controller.set('model', data);
         });
     }

@@ -2,12 +2,13 @@
     <div class="pure-g-r">
         <div class="pure-u-1-5">
             <p class="search-meta">{{model.length}} Ergebnisse</p>
+            <button {{action 'searchMore' controller.query}}>Andere Seiten durchsuchen</button>
         </div>
         <div class="pure-u-4-5">
             <ul>
                 {{#each}}
                     <li>{{#link-to 'bookDetail' _id}}
-                        {{title}}
+                        {{title}} {{#if year}}({{year}}){{/if}}
                     {{/link-to}}</li>
                 {{/each}}
             </ul>

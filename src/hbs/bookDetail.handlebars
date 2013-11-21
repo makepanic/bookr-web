@@ -5,7 +5,7 @@
             <img {{bindAttr src="largestThumbnail" alt="title"}}/>
         </div>
         <div class="pure-u-4-5">
-            <h2>{{title}} ({{year}})</h2>
+            <h2>{{title}} {{#if year}}({{year}}){{/if}}</h2>
             <h3 class="sub-header">{{subtitle}}</h3>
 
             <ul>
