@@ -9,10 +9,13 @@
             <h3 class="sub-header">{{subtitle}}</h3>
 
             <ul>
+                {{#if publisher}}
                 <li>
                     <h5>Publisher</h5>
                     <p>{{publisher}}</p>
                 </li>
+                {{/if}}
+                {{#if isbn.isbn10}}
                 <li>
                     <h5>ISBN 10</h5>
                     <div class="pure-g-r">
@@ -21,6 +24,8 @@
                     {{/each}}
                     </div>
                 </li>
+                {{/if}}
+                {{#if isbn.isbn13}}
                 <li>
                     <h5>ISBN 13</h5>
                     <div class="pure-g-r">
@@ -29,10 +34,13 @@
                         {{/each}}
                     </div>
                 </li>
+                {{/if}}
+                {{#if textSnippet}}
                 <li>
                     <h5>Text-Snippet</h5>
                     <p>{{{textSnippet}}}</p>
                 </li>
+                {{/if}}
             </ul>
         </div>
     </div>

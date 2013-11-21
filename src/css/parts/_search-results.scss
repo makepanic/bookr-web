@@ -6,8 +6,16 @@
 .search-results{
   margin-top: 40px;
 
+  .more-action{
+    padding: 10px;
+    margin-top: 0;
+    padding-top: 0;
+    cursor: pointer;
+  }
+
   ul{
     margin-top: 0;
+    padding-left: 0;
     list-style: none;
   }
   li{

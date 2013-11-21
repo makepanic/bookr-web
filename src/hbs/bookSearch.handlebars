@@ -2,7 +2,6 @@
     <div class="pure-g-r">
         <div class="pure-u-1-5">
             <p class="search-meta">{{model.length}} Ergebnisse</p>
-            <!--<button {{action 'searchMore' controller.query}}>Andere Seiten durchsuchen</button>-->
         </div>
         <div class="pure-u-4-5">
             <ul>
@@ -12,6 +11,9 @@
                     {{/link-to}}</li>
                 {{/each}}
             </ul>
+            {{#unless controllers.application.searchedMore }}
+                <p class="more-action" {{action 'searchMore'}}>Weitere Bibliotheken durchsuchen</p>
+            {{/unless}}
         </div>
     </div>
 </div>

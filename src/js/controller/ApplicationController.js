@@ -1,5 +1,6 @@
 BOOKR.ApplicationController = Ember.Controller.extend({
     query: '',
+    searchedMore: false,
 
     actions: {
         search: function(){

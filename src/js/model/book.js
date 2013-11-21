@@ -101,6 +101,9 @@ BOOKR.Book.reopenClass({
         return new Ember.RSVP.Promise(function (resolve, reject) {
             resolve($.getJSON(requestUrl));
         }).then(function (books) {
+
+            console.log('book.search', books);
+
             return Ember.RSVP.Promise(function (resolve, reject) {
                 resolve(books.map(function (book) {
                     // check if book already in store
@@ -120,25 +123,34 @@ BOOKR.Book.reopenClass({
             var booksPromise;
 
             booksPromise = new Ember.RSVP.Promise(function (resolve, reject) {
+
                 if (books.length || cfg._calledMore) {
+
                     console.log('found results, resolving');
-                    resolve(books);
+                    console.log(cfg);
+                    resolve({
+                        books: books,
+                        calledMore: cfg.more
+                    });
+
                 } else {
+
                     console.log('found no results, calling search with more');
                     BOOKR.Book.search({
                         more: true,
                         query: cfg.query,
                         _calledMore: true
-                    }).then(function (books) {
-                        resolve(books);
+                    }).then(function (result) {
+                        resolve(result);
                     });
+
                 }
             });
 
             return booksPromise;
 
-        }).then(function (books) {
-            return books;
+        }).then(function (result) {
+            return result;
         });
     }
 });
