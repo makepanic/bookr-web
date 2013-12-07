@@ -1,0 +1,53 @@
+<div class="book-detail">
+    <div class="pure-g-r">
+
+        <div class="pure-u-1-5">
+            <img {{bindAttr src="largestThumbnail" alt="title"}}/>
+        </div>
+        <div class="pure-u-4-5">
+            <h2>{{title}} {{#if year}}({{year}}){{/if}}</h2>
+            <h3 class="sub-header">{{subtitle}}</h3>
+
+            <ul>
+                {{#if authors}}
+                    <li>
+                        <h5>Autoren</h5>
+                        <p>
+                            {{#each authors}}
+                                {{this}},
+                            {{/each}}
+                        </p>
+                    </li>
+                {{/if}}
+                {{#if publisher}}
+                    <li>
+                        <h5>Publisher</h5>
+                        <p>{{publisher}}</p>
+                    </li>
+                {{/if}}
+                {{#if isbn.isbn10}}
+                    <li>
+                        <h5>ISBN 10</h5>
+                        <div class="pure-g-r">
+                            <div class="pure-u-1-3">{{isbn.isbn10}}</div>
+                        </div>
+                    </li>
+                {{/if}}
+                {{#if isbn.isbn13}}
+                    <li>
+                        <h5>ISBN 13</h5>
+                        <div class="pure-g-r">
+                            <div class="pure-u-1-3">{{isbn.isbn13}}</div>
+                        </div>
+                    </li>
+                {{/if}}
+                {{#if textSnippet}}
+                    <li>
+                        <h5>Text-Snippet</h5>
+                        <p>{{{textSnippet}}}</p>
+                    </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</div>

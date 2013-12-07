@@ -22,6 +22,7 @@ require('./model/book.js');
 require('./controller/ApplicationController.js');
 require('./controller/bookSearch.controller');
 require('./controller/bookDetail.controller');
+require('./controller/bookVersion.controller');
 
 // views
 require('./view/index.view');

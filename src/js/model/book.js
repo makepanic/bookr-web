@@ -11,18 +11,17 @@ BOOKR.Book = Ember.Object.extend({
     title: '',
     subtitle: '',
     authors: [],
+    isbns: []
+});
+BOOKR.BookVersion = Ember.Object.extend({
+    title: '',
+    subtitle: '',
+    authors: [],
     year: '',
-    publisher: '',
-    isbn: {
-        isbn10: [],
-        isbn13: []
-    },
-    thumbnail: {
-        small: '',
-        normal: ''
-    },
+    isbn: {},
     textSnippet: '',
-
+    thumbnail: {},
+    publisher: '',
     largestThumbnail: function () {
         var thumb = this.get('thumbnail'),
             thumbUrl = '';
@@ -41,6 +40,37 @@ BOOKR.Book = Ember.Object.extend({
 });
 
 BOOKR.Book.reopenClass({
+    version: function (isbnkey) {
+        var requestUrl = BOOKR.get('apiUrl'),
+            foundVersion;
+
+        foundVersion = BOOKR.TemporaryStore.find('bookVersions', isbnkey);
+
+        if (!foundVersion) {
+            // has version cached
+            // TODO: simplify return
+            requestUrl += 'book/version/' + isbnkey;
+
+            return new Ember.RSVP.Promise(function (resolve, reject) {
+                resolve($.getJSON(requestUrl));
+            }).then(function (version) {
+                var bookrBookVersion;
+
+                if (version.hasOwnProperty('superBook')){
+                    // found version
+                    bookrBookVersion = BOOKR.BookVersion.create(version);
+                }
+
+                return bookrBookVersion;
+            });
+        } else {
+            return new Ember.RSVP.Promise(function (resolve, reject) {
+                resolve(foundVersion);
+            });
+        }
+
+
+    },
     find: function (id) {
         var promise = new Ember.RSVP.Promise(function (resolve, reject) {
             var foundBook,
@@ -52,9 +82,11 @@ BOOKR.Book.reopenClass({
                     requestUrl = BOOKR.get('apiUrl');
                     requestUrl += 'book/' + id;
 
-                    $.getJSON(requestUrl).then(function (books) {
-                        return books.map(function (book) {
-                            // check if book already in store
+                    $.getJSON(requestUrl).then(function (book) {
+                        var bookrBook;
+
+                        if (book._id) {
+                            // found book
                             var storedBook = BOOKR.TemporaryStore.find('books', book._id),
                                 bookrBook;
 
@@ -64,8 +96,9 @@ BOOKR.Book.reopenClass({
                                 bookrBook = BOOKR.Book.create(book);
                                 BOOKR.TemporaryStore.store('books', book._id, bookrBook);
                             }
-                            resolve(bookrBook);
-                        });
+                        }
+
+                        resolve(bookrBook);
                     });
                 } else {
                     resolve(foundBook);
