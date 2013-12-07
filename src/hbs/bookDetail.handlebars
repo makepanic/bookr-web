@@ -2,15 +2,30 @@
     <div class="pure-g-r">
 
         <div class="pure-u-1-5">
-            <img {{bindAttr src="largestThumbnail" alt="title"}}/>
         </div>
         <div class="pure-u-4-5">
             <h2>{{title}} {{#if year}}({{year}}){{/if}}</h2>
             <h3 class="sub-header">{{subtitle}}</h3>
 
             <ul>
+                {{#if authors}}
+                    <li>
+                        <h5>Autoren</h5>
+                        <p>
+                            {{#each authors}}
+                                {{this}},
+                            {{/each}}
+                        </p>
+                    </li>
+                {{/if}}
+            </ul>
+
+            <ul>
+                <li><h5>Versionen</h5></li>
             {{#each preparedIsbns}}
-                <li>{{#link-to 'bookVersion' key}}{{types}}{{/link-to}}</li>
+                <li>
+                    {{book-version types=types key=key}}
+                </li>
             {{/each}}
             </ul>
         </div>

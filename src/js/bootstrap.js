@@ -26,3 +26,6 @@ require('./controller/bookVersion.controller');
 
 // views
 require('./view/index.view');
+
+// components
+require('./components/bookVersion.component');

@@ -1,0 +1,11 @@
+{{#if version}}
+    {{#link-to 'bookVersion' key}}
+        {{#with version}}
+            <p>{{title}} {{#if year}}({{year}}){{/if}} {{#if publisher}}- {{publisher}}{{/if}}</p>
+        {{/with}}
+    {{/link-to}}
+{{else}}
+    {{#unless loaded}}
+        <strong>loading indicator</strong>
+    {{/unless}}
+{{/if}}
