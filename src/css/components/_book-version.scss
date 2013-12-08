@@ -25,6 +25,11 @@
     display: block;
     border-top: 1px solid $grey-lighter;
     padding: 10px 0;
+    @include transition(padding-left, .1s);
+
+    &:hover{
+      padding-left: 10px;
+    }
 
     .version-isbn{
       color: $black;
