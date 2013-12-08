@@ -1,0 +1,37 @@
+@import "../colors";
+@import "../mixins";
+
+.book-version{
+  $offset: -40px;
+
+  opacity: 0;
+
+  @include transition(all, .2s);
+
+  &.version-ready{
+    opacity: 1;
+  }
+
+  h4{
+    margin: 0 0 5px 0;
+
+    small{
+      font-weight: normal;
+      color: $black-lighter;
+    }
+  }
+
+  a{
+    display: block;
+    border-top: 1px solid $grey-lighter;
+    padding: 10px 0;
+
+    .version-isbn{
+      color: $black;
+    }
+  }
+
+  .version-isbn{
+    font-size: .9em;
+  }
+}

@@ -21,7 +21,8 @@
             </ul>
 
             <ul>
-                <li><h5>Versionen</h5></li>
+                <!-- lazy TODO: remove empty p -->
+                <li><h5>Auflagen ({{preparedIsbns.length}})</h5><p></p></li>
             {{#each preparedIsbns}}
                 <li>
                     {{book-version types=types key=key}}

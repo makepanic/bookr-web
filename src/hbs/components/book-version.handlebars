@@ -1,11 +1,14 @@
 {{#if version}}
     {{#link-to 'bookVersion' key}}
         {{#with version}}
-            <p>{{title}} {{#if year}}({{year}}){{/if}} {{#if publisher}}- {{publisher}}{{/if}}</p>
+            <h4>{{title}} {{#if year}}({{year}}){{/if}} {{#if publisher}}<small>- {{publisher}}</small>{{/if}}</h4>
+            <div class="version-isbn">
+                <strong>isbn10</strong>: {{isbn.isbn10}}
+                <strong>isbn13</strong>: {{isbn.isbn13}}
+            </div>
         {{/with}}
     {{/link-to}}
 {{else}}
     {{#unless loaded}}
-        <strong>loading indicator</strong>
     {{/unless}}
 {{/if}}

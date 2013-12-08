@@ -8,7 +8,8 @@ BOOKR.TemporaryStore.reopenClass({
 
     // variable that holds everything
     storage: {
-        _books: {}
+        _books: {},
+        _bookVersions: {}
     },
 
     /**

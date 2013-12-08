@@ -59,6 +59,7 @@ BOOKR.Book.reopenClass({
                 if (version.hasOwnProperty('superBook')){
                     // found version
                     bookrBookVersion = BOOKR.BookVersion.create(version);
+                    BOOKR.TemporaryStore.store('bookVersions', isbnkey, bookrBookVersion);
                 }
 
                 return bookrBookVersion;
