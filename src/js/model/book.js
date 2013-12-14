@@ -13,35 +13,10 @@ BOOKR.Book = Ember.Object.extend({
     authors: [],
     isbns: []
 });
-BOOKR.BookVersion = Ember.Object.extend({
-    title: '',
-    subtitle: '',
-    authors: [],
-    year: '',
-    isbn: {},
-    textSnippet: '',
-    thumbnail: {},
-    publisher: '',
-    largestThumbnail: function () {
-        var thumb = this.get('thumbnail'),
-            thumbUrl = '';
-
-        if (thumb.normal.length) {
-            thumbUrl = thumb.normal;
-        } else if(thumb.small.length) {
-            thumbUrl = thumb.small;
-        } else {
-            thumbUrl = 'http://placehold.it/128x200';
-        }
-
-        return thumbUrl;
-
-    }.property('thumbnail.small', 'thumbnail.normal')
-});
 
 BOOKR.Book.reopenClass({
     version: function (isbnkey) {
-        var requestUrl = BOOKR.get('apiUrl'),
+        var requestUrl,
             foundVersion;
 
         foundVersion = BOOKR.TemporaryStore.find('bookVersions', isbnkey);
@@ -49,11 +24,9 @@ BOOKR.Book.reopenClass({
         if (!foundVersion) {
             // has version cached
             // TODO: simplify return
-            requestUrl += 'book/version/' + isbnkey;
+            requestUrl = 'book/version/' + isbnkey;
 
-            return new Ember.RSVP.Promise(function (resolve, reject) {
-                resolve($.getJSON(requestUrl));
-            }).then(function (version) {
+            return BOOKR.getJSON(requestUrl).then(function (version) {
                 var bookrBookVersion;
 
                 if (version.hasOwnProperty('superBook')){
@@ -80,10 +53,9 @@ BOOKR.Book.reopenClass({
             if (id.length) {
                 foundBook = BOOKR.TemporaryStore.find('books', id);
                 if (!foundBook) {
-                    requestUrl = BOOKR.get('apiUrl');
-                    requestUrl += 'book/' + id;
+                    requestUrl = 'book/' + id;
 
-                    $.getJSON(requestUrl).then(function (book) {
+                    BOOKR.getJSON(requestUrl).then(function (book) {
                         var bookrBook;
 
                         if (book._id) {
@@ -125,16 +97,13 @@ BOOKR.Book.reopenClass({
             cfg = $.extend({}, defaults, options),
             requestUrl;
 
-        requestUrl = BOOKR.get('apiUrl');
-        requestUrl += 'search/' + cfg.query + '/';
+        requestUrl = 'search/' + cfg.query + '/';
 
         if (cfg.more) {
             requestUrl += 'more';
         }
 
-        return new Ember.RSVP.Promise(function (resolve, reject) {
-            resolve($.getJSON(requestUrl));
-        }).then(function (books) {
+        return BOOKR.getJSON(requestUrl).then(function (books) {
 
             console.log('book.search', books);
 
