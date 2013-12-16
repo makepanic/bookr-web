@@ -1,27 +1,45 @@
 BOOKR.BookDetailController = Ember.ObjectController.extend({
-
-    preparedIsbns: [],
     bestVersion: null,
-
-    actions: {
-        bestVersionAvailable: function(version){
-            this.set('bestVersion', version)
-
-        }
-    },
+    versions: Em.ArrayController.create({
+        sortProperties: ['year'],
+        sortAscending: false
+    }),
 
     isbnsChanged: function () {
-        var isbns = this.get('isbns'),
-            preparedIsbns = [];
+        var that = this,
+            isbns = this.get('isbns'),
+            versionCtrl = this.get('versions'),
+            promises = [],
+            bestVersion;
+
+        // reset fields that arent't created in the model
+        this.set('bestVersion', null);
+        this.set('versions.content', []);
 
         isbns.forEach(function (isbn) {
-            preparedIsbns.push({
-                key: isbn.join('-'),
-                types: isbn
-            });
+            var key = isbn.join('-');
+
+            promises.push(BOOKR.Book.version(key).then(function (version) {
+                if (version && version.hasOwnProperty('superBook')) {
+                    versionCtrl.addObject(version);
+                }
+            }));
         });
 
-        this.set('preparedIsbns', preparedIsbns);
-    }.observes('isbns')
+        Em.RSVP.all(promises).then(function() {
+            // all promises resolved
+            // look for best version
+            versionCtrl.forEach(function(version){
+                if (!bestVersion) {
+                    bestVersion = version;
+                } else {
+                    if (bestVersion.quality < version.quality) {
+                        bestVersion = version;
+                    }
+                }
+            });
+            that.set('bestVersion', bestVersion);
+        });
+    }.observes('model')
 
 });

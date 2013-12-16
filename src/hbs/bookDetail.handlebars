@@ -18,7 +18,7 @@
                         <h5>Autoren</h5>
                         <p>
                             {{#each authors}}
-                                {{this}},
+                                {{this}} <br/>
                             {{/each}}
                         </p>
                     </li>
@@ -33,7 +33,9 @@
             <ul>
                 <!-- lazy TODO: remove empty p -->
                 <li><h5>Auflagen</h5><p></p></li>
-                {{book-version-list isbns=preparedIsbns action="bestVersionAvailable"}}
+                {{#each versions}}
+                    {{book-version version=this}}
+                {{/each}}
             </ul>
         </div>
     </div>

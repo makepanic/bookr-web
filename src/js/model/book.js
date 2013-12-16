@@ -11,7 +11,8 @@ BOOKR.Book = Ember.Object.extend({
     title: '',
     subtitle: '',
     authors: [],
-    isbns: []
+    isbns: [],
+    versions: []
 });
 
 BOOKR.Book.reopenClass({
@@ -38,6 +39,7 @@ BOOKR.Book.reopenClass({
                 return bookrBookVersion;
             });
         } else {
+            console.log('found cached version', isbnkey);
             return new Ember.RSVP.Promise(function (resolve, reject) {
                 resolve(foundVersion);
             });
