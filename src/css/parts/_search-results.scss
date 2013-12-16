@@ -26,6 +26,11 @@
     a{
       display: block;
       padding: 10px;
+
+      small{
+        font-weight: normal;
+        color: $black-lighter;
+      }
     }
   }
 }

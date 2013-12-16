@@ -1,6 +1,9 @@
 var BOOKR = Ember.Application.create({
     version: '0.1.0',
 
+    // global loading state for ajax loader
+    loading: false,
+
     // <title> content
     title: '',
 

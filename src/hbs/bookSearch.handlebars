@@ -1,19 +1,33 @@
 <div class="search-results">
     <div class="pure-g-r">
-        <div class="pure-u-1-5">
-            <p class="search-meta">{{model.length}} Ergebnisse</p>
+        {{#if BOOKR.loading}}
+        <div class="pure-u-1">
+            <div class="loader"></div>
+            <p class="align-center">Inhalt wird geladen</p>
         </div>
-        <div class="pure-u-4-5">
-            <ul>
-                {{#each}}
-                    <li>{{#link-to 'bookDetail' _id}}
-                        {{title}} {{#if year}}({{year}}){{/if}}
-                    {{/link-to}}</li>
-                {{/each}}
-            </ul>
-            {{#unless controllers.application.searchedMore }}
-                <p class="more-action" {{action 'searchMore'}}>Weitere Bibliotheken durchsuchen</p>
-            {{/unless}}
-        </div>
+        {{else}}
+            <div class="pure-u-1-5">
+                <p class="search-meta">{{model.length}} Ergebnisse</p>
+            </div>
+            <div class="pure-u-4-5">
+                <ul>
+                    {{#each}}
+                        <li>{{#link-to 'bookDetail' _id}}
+                            {{title}} {{#if year}}({{year}}){{/if}}
+                            {{#if authors}}
+                                <small>
+                                    {{#each authors}}
+                                        {{this}}
+                                    {{/each}}
+                                </small>
+                            {{/if}}
+                        {{/link-to}}</li>
+                    {{/each}}
+                </ul>
+                {{#unless controllers.application.searchedMore }}
+                    <p class="more-action" {{action 'searchMore'}}>Weitere Bibliotheken durchsuchen</p>
+                {{/unless}}
+            </div>
+        {{/if}}
     </div>
 </div>
