@@ -2,19 +2,14 @@ BOOKR.BookVersionComponent = Ember.Component.extend({
     classNames: ['book-version'],
     classNameBindings: ['loaded:version-ready'],
     loaded: false,
-    key: '',
-    types: [],
-    version: undefined,
+    key: function(){
+        var version = this.get('version');
+        return version.isbn.isbn10 + '-' + version.isbn.isbn13;
+    }.property('version.isbn.isbn10', 'version.isbn.isbn13'),
 
     didInsertElement: function () {
-        var key = this.get('key'),
-            that = this;
-
-        BOOKR.Book.version(key).then(function (version) {
-            if (version && version.hasOwnProperty('superBook')) {
-                that.set('version', version);
-            }
-            that.set('loaded', true);
+        Em.run.later(this, function() {
+            this.set('loaded', true);
         });
     }
 });

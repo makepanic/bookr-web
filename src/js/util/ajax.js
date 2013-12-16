@@ -10,8 +10,6 @@
  * @returns {Promise}
  */
 BOOKR.ajax = function (settings) {
-    console.log('BOOKR.ajax', settings);
-
     return new Ember.RSVP.Promise(function(resolve, reject) {
         // prefix url
         settings.url = BOOKR.get('apiUrl') + settings.url;

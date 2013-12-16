@@ -30,4 +30,5 @@ require('./controller/bookVersion.controller');
 require('./view/index.view');
 
 // components
+require('./components/bookVersionList.component');
 require('./components/bookVersion.component');

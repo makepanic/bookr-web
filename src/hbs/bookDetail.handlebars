@@ -2,6 +2,11 @@
     <div class="pure-g-r">
 
         <div class="pure-u-1-5">
+            {{#if bestVersion}}
+                {{#with bestVersion}}
+                    <img {{bindAttr src="largestThumbnail" alt="title"}}/>
+                {{/with}}
+            {{/if}}
         </div>
         <div class="pure-u-4-5">
             <h2>{{title}} {{#if year}}({{year}}){{/if}}</h2>
@@ -18,16 +23,17 @@
                         </p>
                     </li>
                 {{/if}}
+                {{#if bestVersion.textSnippet}}
+                    <li>
+                        <h5>Text-Snippet</h5>
+                        <p>{{{bestVersion.textSnippet}}}</p>
+                    </li>
+                {{/if}}
             </ul>
-
             <ul>
                 <!-- lazy TODO: remove empty p -->
                 <li><h5>Auflagen</h5><p></p></li>
-            {{#each preparedIsbns}}
-                <li>
-                    {{book-version types=types key=key}}
-                </li>
-            {{/each}}
+                {{book-version-list isbns=preparedIsbns action="bestVersionAvailable"}}
             </ul>
         </div>
     </div>
