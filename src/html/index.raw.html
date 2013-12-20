@@ -17,7 +17,9 @@
     <link rel="stylesheet" href="<!-- @echo NAME -->-<!-- @echo VERSION -->.min.css"/>
     <script src="<!-- @echo NAME -->-<!-- @echo VERSION -->.js"></script>
 
-
+    <!-- @if NODE_ENV='DEVELOPMENT' -->
+    <script src="http://localhost:35729/livereload.js"></script>
+    <!-- @endif -->
 </head>
 <body>
 <!--[if lt IE 7]>

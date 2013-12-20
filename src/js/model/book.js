@@ -1,12 +1,5 @@
-/**
- * Created with IntelliJ IDEA.
- * User: mkp
- * Date: 20.11.13
- * Time: 15:25
- * To change this template use File | Settings | File Templates.
- */
-
-BOOKR.Book = Ember.Object.extend({
+/*global BOOKR, Em */
+BOOKR.Book = Em.Object.extend({
     id: '',
     title: '',
     subtitle: '',
@@ -39,8 +32,7 @@ BOOKR.Book.reopenClass({
                 return bookrBookVersion;
             });
         } else {
-            console.log('found cached version', isbnkey);
-            return new Ember.RSVP.Promise(function (resolve, reject) {
+            return new Em.RSVP.Promise(function (resolve) {
                 resolve(foundVersion);
             });
         }
@@ -48,7 +40,7 @@ BOOKR.Book.reopenClass({
 
     },
     find: function (id) {
-        var promise = new Ember.RSVP.Promise(function (resolve, reject) {
+        var promise = new Em.RSVP.Promise(function (resolve, reject) {
             var foundBook,
                 requestUrl;
 
@@ -62,8 +54,7 @@ BOOKR.Book.reopenClass({
 
                         if (book._id) {
                             // found book
-                            var storedBook = BOOKR.TemporaryStore.find('books', book._id),
-                                bookrBook;
+                            var storedBook = BOOKR.TemporaryStore.find('books', book._id);
 
                             if (storedBook) {
                                 bookrBook = storedBook;
@@ -96,7 +87,7 @@ BOOKR.Book.reopenClass({
                 more: false,
                 _calledMore: false
             },
-            cfg = $.extend({}, defaults, options),
+            cfg = Em.$.extend({}, defaults, options),
             requestUrl;
 
         requestUrl = 'search/' + cfg.query + '/';
@@ -107,9 +98,7 @@ BOOKR.Book.reopenClass({
 
         return BOOKR.getJSON(requestUrl).then(function (books) {
 
-            console.log('book.search', books);
-
-            return Ember.RSVP.Promise(function (resolve, reject) {
+            return Em.RSVP.Promise(function (resolve) {
                 resolve(books.map(function (book) {
                     // check if book already in store
                     var storedBook = BOOKR.TemporaryStore.find('books', book._id),
@@ -127,12 +116,10 @@ BOOKR.Book.reopenClass({
         }).then(function (books) {
             var booksPromise;
 
-            booksPromise = new Ember.RSVP.Promise(function (resolve, reject) {
+            booksPromise = new Em.RSVP.Promise(function (resolve) {
 
                 if (books.length || cfg._calledMore) {
 
-                    console.log('found results, resolving');
-                    console.log(cfg);
                     resolve({
                         books: books,
                         calledMore: cfg.more
@@ -140,7 +127,6 @@ BOOKR.Book.reopenClass({
 
                 } else {
 
-                    console.log('found no results, calling search with more');
                     BOOKR.Book.search({
                         more: true,
                         query: cfg.query,

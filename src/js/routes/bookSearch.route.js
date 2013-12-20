@@ -1,14 +1,10 @@
-
-BOOKR.BookSearchRoute = Ember.Route.extend({
-    activate: function () {
-        BOOKR.set('title', 'Buchsuche');
-    },
-
+/*global BOOKR, Em */
+BOOKR.BookSearchRoute = Em.Route.extend({
     model: function(params){
         return params.query;
     },
     setupController: function(controller, query){
-        console.log('setupController', controller, query);
+        BOOKR.set('title', query + ' | Buchsuche');
 
         // update application query
         controller.set('controllers.application.query', query);
@@ -21,7 +17,6 @@ BOOKR.BookSearchRoute = Ember.Route.extend({
             more: false
         }).then(function (data) {
             BOOKR.set('loading', false);
-            console.log('bookr search data', data);
             controller.set('controllers.application.searchedMore', data.calledMore);
             controller.set('model', data.books);
         });

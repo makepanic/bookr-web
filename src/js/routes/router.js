@@ -1,6 +1,4 @@
-/*global GLOBE */
-
-
+/*global BOOKR, Em, require */
 BOOKR.Router.map(function() {
     this.route('index', { path: '/' });
     this.route('bookSearch', { path: '/search/:query'});
@@ -10,7 +8,7 @@ BOOKR.Router.map(function() {
 BOOKR.Router.reopen({
     location: 'hash'
 });
-BOOKR.IndexRoute = Ember.Route.extend({
+BOOKR.IndexRoute = Em.Route.extend({
     activate: function(){
         BOOKR.set('title', '');
     }

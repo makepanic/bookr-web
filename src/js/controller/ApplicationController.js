@@ -1,4 +1,5 @@
-BOOKR.ApplicationController = Ember.Controller.extend({
+/*global BOOKR, Em */
+BOOKR.ApplicationController = Em.Controller.extend({
     query: '',
     searchedMore: false,
 

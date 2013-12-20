@@ -6,7 +6,6 @@ require('./vendor/ember/ember.js');
 
 
 // utils
-require('./util/strings');
 require('./util/app');
 require('./util/ajax');
 require('./util/temporaryStore');

@@ -1,4 +1,6 @@
-var BOOKR = Ember.Application.create({
+/*global Em, Strings */
+var BOOKR = Em.Application.create({});
+BOOKR = BOOKR.reopen({
     version: '0.1.0',
 
     // global loading state for ajax loader
@@ -8,20 +10,22 @@ var BOOKR = Ember.Application.create({
     title: '',
 
     // api baseurl
-    apiUrl: 'http://54.220.208.245/',
+    apiUrl: 'http://192.168.178.44:3000/',
 
-    // Event that observes GLOBE.title and changes the document title
+    // Event that observes BOOKR.title and changes the document title
     titleChanged: function(){
-
         var title = this.get('title');
-        var suffix = Strings.titleSuffix + ' ' + BOOKR.version;
+        var suffix = BOOKR.strings.titleSuffix + ' ' + BOOKR.version;
 
         if(title.length){
-            $(document).attr('title', title + ' | ' + suffix);
+            Em.$(document).attr('title', title + ' | ' + suffix);
         }else{
-            $(document).attr('title', suffix);
+            Em.$(document).attr('title', suffix);
         }
 
-    }.observes('title')
+    }.observes('title'),
 
+    strings: {
+        titleSuffix: ' Bookr'
+    }
 });

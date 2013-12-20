@@ -1,14 +1,15 @@
-BOOKR.IndexView = Ember.View.extend({
+/*global BOOKR, Em */
+BOOKR.IndexView = Em.View.extend({
 
     didInsertElement: function () {
-        var height = $(window).height();
-        $('.head-bar').css({
+        var height = Em.$(window).height();
+        Em.$('.head-bar').css({
             marginTop: (height / 2 - 40) + 'px'
         });
     },
 
     willDestroyElement: function () {
-        $('.head-bar').css({
+        Em.$('.head-bar').css({
             marginTop: ''
         });
     }

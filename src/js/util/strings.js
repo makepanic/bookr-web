@@ -1,4 +1,0 @@
-var Strings = {
-    titleSuffix: ' | Bookr'
-
-};

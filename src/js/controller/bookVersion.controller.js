@@ -1,1 +1,2 @@
-BOOKR.BookVersionController = Ember.ObjectController.extend({});
+/*global BOOKR, Em */
+BOOKR.BookVersionController = Em.ObjectController.extend({});

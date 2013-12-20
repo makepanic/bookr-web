@@ -18,16 +18,6 @@ module.exports = function (grunt) {
         res: 'build/res',
         release: 'build/release'
     };
-
-    // helper methods
-    var prefixEach = function(array, prefix){
-        var newArray = [];
-        for(var itemIndex = 0, max = array.length; itemIndex < max; itemIndex++){
-            newArray[itemIndex] = prefix + array[itemIndex];
-        }
-        return newArray;
-    };
-
     var watchTasks = [
         'copy:tmp',
         'build',
@@ -39,6 +29,9 @@ module.exports = function (grunt) {
         yeoman: yeomanConfig,
         bookr: bookrConfig,
         watch: {
+            options: {
+                livereload: true
+            },
             js_files:{
                 files: [ '<%= bookr.src %>/js/**/*.js' ],
                 tasks: watchTasks
@@ -71,6 +64,17 @@ module.exports = function (grunt) {
                         '<%= bookr.src %>/css/vendor/purecss/pure.css'
                     ]
                 }
+            }
+        },
+
+        eslint: {
+            target: [
+                '<%= bookr.src %>/js/**/*.js',
+                '!<%= bookr.src%>/js/vendor/**/*.js',
+                '!<%= bookr.src %>/js/bootstrap.js'
+            ],
+            options: {
+                config: 'eslint.json'
             }
         },
 //        concurrent: {
@@ -183,6 +187,18 @@ module.exports = function (grunt) {
                     '<%= bookr.dist %>/<%= pkg.name %>-<%= pkg.version %>.css': '<%= bookr.src %>/css/bootstrap.scss'
                 }
             }
+        },
+
+        env: {
+            dev: {
+                NODE_ENV : 'DEVELOPMENT'
+            },
+            test: {
+                NODE_ENV : 'TESTING'
+            },
+            prod : {
+                NODE_ENV : 'PRODUCTION'
+            }
         }
     });
 
@@ -211,8 +227,17 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('default', [
-//        'jshint',
+        'eslint',
 //        'test',
+        'clean:tmp',
+        'copy:tmp',
+        'build',
+        'copy:assets',
+        'watch'
+    ]);
+
+    grunt.registerTask('dev', [
+        'env:dev',
         'clean:tmp',
         'copy:tmp',
         'build',

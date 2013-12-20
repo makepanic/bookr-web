@@ -1,4 +1,5 @@
-BOOKR.BookVersion = Ember.Object.extend({
+/*global BOOKR, Em */
+BOOKR.BookVersion = Em.Object.extend({
     title: '',
     subtitle: '',
     authors: [],

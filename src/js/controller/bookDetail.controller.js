@@ -1,4 +1,5 @@
-BOOKR.BookDetailController = Ember.ObjectController.extend({
+/*global BOOKR, Em */
+BOOKR.BookDetailController = Em.ObjectController.extend({
     bestVersion: null,
     versions: Em.ArrayController.create({
         sortProperties: ['year'],

@@ -1,9 +1,9 @@
-/*global GLOBE, Ember */
+/*global BOOKR, Em */
 /**
  * Storage to temporary hold anything
  * @see {@link https://github.com/makepanic/globe }
  */
-BOOKR.TemporaryStore = Ember.Object.extend({});
+BOOKR.TemporaryStore = Em.Object.extend({});
 BOOKR.TemporaryStore.reopenClass({
 
     // variable that holds everything

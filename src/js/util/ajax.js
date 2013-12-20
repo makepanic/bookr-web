@@ -1,5 +1,4 @@
-/*global GLOBE, Em */
-
+/*global BOOKR, Em */
 /**
  * $.ajax wrapper that uses Ember.run to run async code.
  * Necessary for async Ember testing.
@@ -10,7 +9,7 @@
  * @returns {Promise}
  */
 BOOKR.ajax = function (settings) {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    return new Em.RSVP.Promise(function(resolve, reject) {
         // prefix url
         settings.url = BOOKR.get('apiUrl') + settings.url;
 

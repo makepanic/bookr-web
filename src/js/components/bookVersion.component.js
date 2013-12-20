@@ -1,4 +1,5 @@
-BOOKR.BookVersionComponent = Ember.Component.extend({
+/*global BOOKR, Em */
+BOOKR.BookVersionComponent = Em.Component.extend({
     classNames: ['book-version'],
     classNameBindings: ['loaded:version-ready'],
     loaded: false,

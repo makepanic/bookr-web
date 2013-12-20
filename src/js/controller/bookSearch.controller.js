@@ -1,4 +1,5 @@
-BOOKR.BookSearchController = Ember.ArrayController.extend({
+/*global BOOKR, Em */
+BOOKR.BookSearchController = Em.ArrayController.extend({
     sortProperties: ['year'],
     sortAscending: false,
 
