@@ -67,7 +67,8 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     '<%= bookr.dist %>/<%= pkg.name %>-<%= pkg.version %>.min.css': [
-                        '<%= bookr.tmp %>/css/*.css'
+                        '<%= bookr.dist %>/<%= pkg.name %>-<%= pkg.version %>.css',
+                        '<%= bookr.src %>/css/vendor/purecss/pure.css'
                     ]
                 }
             }
@@ -174,6 +175,14 @@ module.exports = function (grunt) {
                 src: ['**'],
                 dest: '<%= bookr.dist %>'
             }
+        },
+
+        sass: {
+            dist: {
+                files: {
+                    '<%= bookr.dist %>/<%= pkg.name %>-<%= pkg.version %>.css': '<%= bookr.src %>/css/bootstrap.scss'
+                }
+            }
         }
     });
 
@@ -196,6 +205,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'emberTemplates',
         'neuter',
+        'sass',
         'cssmin',
         'preprocess'
     ]);

@@ -8,7 +8,7 @@ var BOOKR = Ember.Application.create({
     title: '',
 
     // api baseurl
-    apiUrl: '//localhost:3000/',
+    apiUrl: 'http://54.220.208.245/',
 
     // Event that observes GLOBE.title and changes the document title
     titleChanged: function(){

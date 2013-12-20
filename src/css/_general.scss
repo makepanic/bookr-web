@@ -1,0 +1,85 @@
+@import "colors";
+@import "mixins";
+
+body,
+.pure-g [class *= "pure-u"],
+.pure-g-r [class *= "pure-u"] {
+  /* Add your font in here, whether it's a custom font or a normal font */
+  font-family: "Open Sans","lucida grande","Segoe UI",arial,verdana, "lucida sans unicode",tahoma,sans-serif;
+}
+
+.wrapper{
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.second-wrapper{
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.align-center{
+  text-align: center;
+}
+
+a{
+  color: $blue;
+  text-decoration: none;
+
+  &:hover{
+    color: $blue-darker;
+  }
+}
+h2,h3,h4,h5,h6{
+  &.sub-header{
+    margin-top: 0;
+    color: $grey-darker;
+    font-weight: lighter;
+  }
+}
+
+.logo{
+  margin: 0;
+  font-weight: lighter;
+  text-align: center;
+  a{
+    display: block;
+  }
+}
+
+.head-bar{
+  margin-top: 50px;
+
+  @include transition(margin-top, .3s, ease);
+}
+.search-bar{
+
+  ::-webkit-input-placeholder { /* WebKit browsers */
+    color:    $grey-darker;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    $grey-darker;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    $grey-darker;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    $grey-darker;
+  }
+
+  input{
+    color: $blue;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid $blue;
+    padding: 10px;
+
+
+
+    &:focus{
+      color: $blue-darker;
+      border-bottom-color: $blue-darker;
+    }
+  }
+}
