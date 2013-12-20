@@ -1,2 +1,1 @@
-bookr-web
-=========
+#bookr-web [![Build Status](https://travis-ci.org/makepanic/bookr-web.png?branch=master)](https://travis-ci.org/makepanic/bookr-web)
