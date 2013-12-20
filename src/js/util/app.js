@@ -1,5 +1,12 @@
-/*global Em, Strings */
+/*global Em, prepareForTesting */
 var BOOKR = Em.Application.create({});
+
+// @if NODE_ENV == 'TESTING'
+if(Em.$.isFunction(window.prepareForTesting)){
+    prepareForTesting(BOOKR);
+}
+// @endif
+
 BOOKR = BOOKR.reopen({
     version: '0.1.0',
 

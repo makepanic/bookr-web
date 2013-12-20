@@ -1,3 +1,4 @@
+/*global require, module */
 'use strict';
 
 module.exports = function (grunt) {
@@ -12,6 +13,7 @@ module.exports = function (grunt) {
         dist: 'dist'
     };
     var bookrConfig = {
+        test: 'test',
         tmp: 'build/tmp',
         dist: 'build/dist',
         src: 'src',
@@ -98,7 +100,7 @@ module.exports = function (grunt) {
             options: {
                 templateName: function (sourceFile) {
                     //public/js/templates
-                    var regex = new RegExp(bookrConfig.src + "/hbs/");
+                    var regex = new RegExp(bookrConfig.src + '/hbs/');
                     return sourceFile.replace(regex, '');
                 }
             },
@@ -126,9 +128,19 @@ module.exports = function (grunt) {
                     VERSION : '<%= pkg.version %>'
                 }
             },
+            js: {
+                src : '<%= bookr.test %>/karma.conf.raw.js',
+                dest : '<%= bookr.test %>/karma.conf.js'
+            },
             html: {
                 src : '<%= bookr.tmp %>/html/index.raw.html',
                 dest : '<%= bookr.dist %>/index.html'
+            },
+            app: {
+                files: {
+                    '<%= bookr.tmp %>/js/util/app.js': '<%= bookr.src %>/js/util/app.js',
+                    '<%= bookr.tmp %>/js/util/ajax.js': '<%= bookr.src %>/js/util/ajax.js'
+                }
             }
         },
 
@@ -199,36 +211,29 @@ module.exports = function (grunt) {
             prod : {
                 NODE_ENV : 'PRODUCTION'
             }
+        },
+
+        karma: {
+            test: {
+                configFile: '<%= bookr.test %>/karma.conf.js',
+                singleRun: true
+            }
         }
     });
 
-//    grunt.registerTask('dev', [
-//        'clean:server',
-//        'concurrent:test',
-//        'connect:test',
-//        'neuter:app',
-//        'mocha'
-//    ]);
-//
-//    grunt.registerTask('test', [
-//        'clean:server',
-//        'concurrent:test',
-//        'connect:test',
-//        'neuter:app',
-//        'mocha'
-//    ]);
-
+    // task called from other tasks
     grunt.registerTask('build', [
         'emberTemplates',
+        'preprocess',
         'neuter',
         'sass',
-        'cssmin',
-        'preprocess'
+        'cssmin'
     ]);
 
+    // general tasks
     grunt.registerTask('default', [
+        'env:prod',
         'eslint',
-//        'test',
         'clean:tmp',
         'copy:tmp',
         'build',
@@ -243,5 +248,14 @@ module.exports = function (grunt) {
         'build',
         'copy:assets',
         'watch'
+    ]);
+
+    grunt.registerTask('test', [
+        'env:test',
+        'clean:tmp',
+        'copy:tmp',
+        'build',
+        'copy:assets',
+        'karma'
     ]);
 };
