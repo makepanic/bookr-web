@@ -12,9 +12,9 @@ BOOKR.BookVersion = Em.Object.extend({
         var thumb = this.get('thumbnail'),
             thumbUrl = '';
 
-        if (thumb.normal.length) {
+        if (thumb.hasOwnProperty('normal') && thumb.normal.length) {
             thumbUrl = thumb.normal;
-        } else if(thumb.small.length) {
+        } else if(thumb.hasOwnProperty('small') && thumb.small.length) {
             thumbUrl = thumb.small;
         } else {
             thumbUrl = 'http://placehold.it/128x200';
