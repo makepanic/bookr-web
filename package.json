@@ -5,7 +5,7 @@
   "devDependencies": {
     "express": "3.2.6",
     "grunt": "~0.4.2",
-    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-uglify": "~0.2.7",
     "grunt-contrib-cssmin": "~0.6.0",
     "grunt-contrib-watch": "~0.3.1",
     "grunt-env": "~0.4.1",

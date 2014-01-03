@@ -121,6 +121,18 @@ module.exports = function (grunt) {
             }
         },
 
+        uglify: {
+            options: {
+                mangle: true
+            },
+            js: {
+                files: {
+                    '<%= bookr.dist %>/<%= pkg.name %>-<%= pkg.version %>.min.js':
+                        ['<%= bookr.dist %>/<%= pkg.name %>-<%= pkg.version %>.js' ]
+                }
+            }
+        },
+
         preprocess: {
             options : {
                 context : {
@@ -226,6 +238,7 @@ module.exports = function (grunt) {
         'emberTemplates',
         'preprocess',
         'neuter',
+        'uglify',
         'sass',
         'cssmin'
     ]);
@@ -237,8 +250,7 @@ module.exports = function (grunt) {
         'clean:tmp',
         'copy:tmp',
         'build',
-        'copy:assets',
-        'watch'
+        'copy:assets'
     ]);
 
     grunt.registerTask('dev', [
