@@ -2,7 +2,20 @@
 // vendor files
 require('./vendor/jquery/jquery.min.js');
 require('./vendor/handlebars/handlebars.runtime.js');
+
+
+// @if NODE_ENV == 'PRODUCTION'
 require('./vendor/ember/ember.min.js');
+// @endif
+
+// @if NODE_ENV == 'DEVELOPMENT'
+require('./vendor/ember/ember.js');
+// @endif
+
+// @if NODE_ENV == 'TESTING'
+// TODO: evtl != PRODUCTION aber so ist übersichtlicher was was required
+require('./vendor/ember/ember.js');
+// @endif
 
 
 // utils

@@ -150,6 +150,7 @@ module.exports = function (grunt) {
             },
             app: {
                 files: {
+                    '<%= bookr.tmp %>/js/bootstrap.js': '<%= bookr.src %>/js/bootstrap.js',
                     '<%= bookr.tmp %>/js/util/app.js': '<%= bookr.src %>/js/util/app.js',
                     '<%= bookr.tmp %>/js/util/ajax.js': '<%= bookr.src %>/js/util/ajax.js'
                 }
