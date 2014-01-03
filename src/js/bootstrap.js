@@ -2,7 +2,7 @@
 // vendor files
 require('./vendor/jquery/jquery.min.js');
 require('./vendor/handlebars/handlebars.runtime.js');
-require('./vendor/ember/ember.js');
+require('./vendor/ember/ember.min.js');
 
 
 // utils
