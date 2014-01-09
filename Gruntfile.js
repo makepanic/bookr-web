@@ -28,6 +28,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        cfg: grunt.file.readJSON('config.json'),
         yeoman: yeomanConfig,
         bookr: bookrConfig,
         watch: {
@@ -137,7 +138,8 @@ module.exports = function (grunt) {
             options : {
                 context : {
                     NAME : '<%= pkg.name %>',
-                    VERSION : '<%= pkg.version %>'
+                    VERSION : '<%= pkg.version %>',
+                    API_URL: '<%= cfg.apiUrl %>'
                 }
             },
             js: {

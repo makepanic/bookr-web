@@ -8,7 +8,7 @@ if(Em.$.isFunction(window.prepareForTesting)){
 // @endif
 
 BOOKR = BOOKR.reopen({
-    version: '0.1.0',
+    version: '/* @echo VERSION */',
 
     // global loading state for ajax loader
     loading: false,
@@ -17,7 +17,7 @@ BOOKR = BOOKR.reopen({
     title: '',
 
     // api baseurl
-    apiUrl: 'http://192.168.178.44:3000/',
+    apiUrl: '/* @echo API_URL */',
 
     // Event that observes BOOKR.title and changes the document title
     titleChanged: function(){
