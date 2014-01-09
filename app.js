@@ -12,7 +12,7 @@ var app = express();
 
 var distDir = '/build/dist/';
 // all express settings
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 80);
 app.use(express.favicon(__dirname + distDir +'favicon.ico'));
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
