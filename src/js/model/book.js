@@ -98,7 +98,7 @@ BOOKR.Book.reopenClass({
 
         return BOOKR.getJSON(requestUrl).then(function (books) {
 
-            return Em.RSVP.Promise(function (resolve) {
+            return new Em.RSVP.Promise(function (resolve) {
                 resolve(books.map(function (book) {
                     // check if book already in store
                     var storedBook = BOOKR.TemporaryStore.find('books', book._id),

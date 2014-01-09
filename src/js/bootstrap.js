@@ -1,7 +1,7 @@
 
 // vendor files
-require('./vendor/jquery/jquery.min.js');
-require('./vendor/handlebars/handlebars.runtime.js');
+require('./vendor/jquery/jquery-2.0.3.min');
+require('./vendor/handlebars/handlebars.runtime-v1.3.0');
 
 
 // @if NODE_ENV == 'PRODUCTION'
