@@ -53,12 +53,6 @@ module.exports = function (grunt) {
             tmp: [ '<%= bookr.tmp %>' ],
             build: [ '<%= bookr.dist %>', '<%= bookr.tmp %>', '<%= bookr.release %>' ]
         },
-//         eslint: {
-//            target:  prefixEach(theApplicationFiles, srcPath),
-//            options: {
-//                config: 'eslint.json'
-//            }
-//         },
         cssmin: {
             dist: {
                 files: {
